@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间，可以对sql进行分类的一个管理 -->
+<mapper namespace="mjxm.mapping.UserMapper">
+    <!-- 根据ID查询-->
+    <select id="selectById" parameterType="int" resultType="mjxm.pojo.User">
+        select * from user where id=#{id};
+    </select>
+    <!-- 插入-->
+    <insert id="insert" parameterType="mjxm.pojo.User">
+        insert into user(id,username,birthday,sex,address) values(#{id},#{username},#{birthday},#{sex},#{address});
+    </insert>
+</mapper>

@@ -1,0 +1,8 @@
+mjxm\mapping\UserMapper.class
+mjxm\service\impl\UserServiceImpl.class
+mjxm\controller\MainController.class
+mjxm\service\impl\TestServiceImpl.class
+mjxm\service\UserService.class
+mjxm\controller\TestController.class
+mjxm\pojo\User.class
+mjxm\service\TestService.class
