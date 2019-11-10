@@ -1,42 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mjxm.mapping.UserMapper">
-  <resultMap id="BaseResultMap" type="mjxm.pojo.User">
-    <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="identified" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mjxm.mapping.UserMapper" >
+  <resultMap id="BaseResultMap" type="mjxm.pojo.User" >
+    <constructor >
+      <idArg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="gender" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="wx_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="wx_img" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="identified" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="number" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="mjxm.pojo.User">
-    <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="identified" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="introduction" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+  <resultMap id="ResultMapWithBLOBs" type="mjxm.pojo.User" >
+    <constructor >
+      <idArg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="gender" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="wx_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="wx_img" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="identified" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="number" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="introduction" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     user_id, user_name, password, gender, wx_name, wx_img, time, type, identified, number
   </sql>
-  <sql id="Blob_Column_List">
+  <sql id="Blob_Column_List" >
     introduction
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     ,
@@ -44,11 +44,11 @@
     from user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="mjxm.pojo.User">
+  <insert id="insert" parameterType="mjxm.pojo.User" >
     insert into user (user_id, user_name, password, 
       gender, wx_name, wx_img, 
       time, type, identified, 
@@ -58,116 +58,116 @@
       #{time,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, #{identified,jdbcType=INTEGER}, 
       #{number,jdbcType=VARCHAR}, #{introduction,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="mjxm.pojo.User">
+  <insert id="insertSelective" parameterType="mjxm.pojo.User" >
     insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
         user_id,
       </if>
-      <if test="userName != null">
+      <if test="userName != null" >
         user_name,
       </if>
-      <if test="password != null">
+      <if test="password != null" >
         password,
       </if>
-      <if test="gender != null">
+      <if test="gender != null" >
         gender,
       </if>
-      <if test="wxName != null">
+      <if test="wxName != null" >
         wx_name,
       </if>
-      <if test="wxImg != null">
+      <if test="wxImg != null" >
         wx_img,
       </if>
-      <if test="time != null">
+      <if test="time != null" >
         time,
       </if>
-      <if test="type != null">
+      <if test="type != null" >
         type,
       </if>
-      <if test="identified != null">
+      <if test="identified != null" >
         identified,
       </if>
-      <if test="number != null">
+      <if test="number != null" >
         number,
       </if>
-      <if test="introduction != null">
+      <if test="introduction != null" >
         introduction,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="userName != null">
+      <if test="userName != null" >
         #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
+      <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="gender != null">
+      <if test="gender != null" >
         #{gender,jdbcType=VARCHAR},
       </if>
-      <if test="wxName != null">
+      <if test="wxName != null" >
         #{wxName,jdbcType=VARCHAR},
       </if>
-      <if test="wxImg != null">
+      <if test="wxImg != null" >
         #{wxImg,jdbcType=VARCHAR},
       </if>
-      <if test="time != null">
+      <if test="time != null" >
         #{time,jdbcType=TIMESTAMP},
       </if>
-      <if test="type != null">
+      <if test="type != null" >
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="identified != null">
+      <if test="identified != null" >
         #{identified,jdbcType=INTEGER},
       </if>
-      <if test="number != null">
+      <if test="number != null" >
         #{number,jdbcType=VARCHAR},
       </if>
-      <if test="introduction != null">
+      <if test="introduction != null" >
         #{introduction,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="mjxm.pojo.User">
+  <update id="updateByPrimaryKeySelective" parameterType="mjxm.pojo.User" >
     update user
-    <set>
-      <if test="userName != null">
+    <set >
+      <if test="userName != null" >
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
+      <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="gender != null">
+      <if test="gender != null" >
         gender = #{gender,jdbcType=VARCHAR},
       </if>
-      <if test="wxName != null">
+      <if test="wxName != null" >
         wx_name = #{wxName,jdbcType=VARCHAR},
       </if>
-      <if test="wxImg != null">
+      <if test="wxImg != null" >
         wx_img = #{wxImg,jdbcType=VARCHAR},
       </if>
-      <if test="time != null">
+      <if test="time != null" >
         time = #{time,jdbcType=TIMESTAMP},
       </if>
-      <if test="type != null">
+      <if test="type != null" >
         type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="identified != null">
+      <if test="identified != null" >
         identified = #{identified,jdbcType=INTEGER},
       </if>
-      <if test="number != null">
+      <if test="number != null" >
         number = #{number,jdbcType=VARCHAR},
       </if>
-      <if test="introduction != null">
+      <if test="introduction != null" >
         introduction = #{introduction,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="mjxm.pojo.User">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="mjxm.pojo.User" >
     update user
     set user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
@@ -181,1358 +181,7 @@
       introduction = #{introduction,jdbcType=LONGVARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="mjxm.pojo.User">
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      wx_name = #{wxName,jdbcType=VARCHAR},
-      wx_img = #{wxImg,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=INTEGER},
-      identified = #{identified,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="mjxm.pojo.User">
-    <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="identified" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="mjxm.pojo.User">
-    <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="identified" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="introduction" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    user_id, user_name, password, gender, wx_name, wx_img, time, type, identified, number
-  </sql>
-  <sql id="Blob_Column_List">
-    introduction
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="mjxm.pojo.User">
-    insert into user (user_id, user_name, password, 
-      gender, wx_name, wx_img, 
-      time, type, identified, 
-      number, introduction)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=VARCHAR}, #{wxName,jdbcType=VARCHAR}, #{wxImg,jdbcType=VARCHAR}, 
-      #{time,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, #{identified,jdbcType=INTEGER}, 
-      #{number,jdbcType=VARCHAR}, #{introduction,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="mjxm.pojo.User">
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="userName != null">
-        user_name,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="gender != null">
-        gender,
-      </if>
-      <if test="wxName != null">
-        wx_name,
-      </if>
-      <if test="wxImg != null">
-        wx_img,
-      </if>
-      <if test="time != null">
-        time,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="identified != null">
-        identified,
-      </if>
-      <if test="number != null">
-        number,
-      </if>
-      <if test="introduction != null">
-        introduction,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="wxName != null">
-        #{wxName,jdbcType=VARCHAR},
-      </if>
-      <if test="wxImg != null">
-        #{wxImg,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="identified != null">
-        #{identified,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        #{introduction,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="mjxm.pojo.User">
-    update user
-    <set>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="wxName != null">
-        wx_name = #{wxName,jdbcType=VARCHAR},
-      </if>
-      <if test="wxImg != null">
-        wx_img = #{wxImg,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        time = #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="identified != null">
-        identified = #{identified,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        number = #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        introduction = #{introduction,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="mjxm.pojo.User">
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      wx_name = #{wxName,jdbcType=VARCHAR},
-      wx_img = #{wxImg,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=INTEGER},
-      identified = #{identified,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR},
-      introduction = #{introduction,jdbcType=LONGVARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="mjxm.pojo.User">
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      wx_name = #{wxName,jdbcType=VARCHAR},
-      wx_img = #{wxImg,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=INTEGER},
-      identified = #{identified,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="mjxm.pojo.User">
-    <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="identified" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="mjxm.pojo.User">
-    <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="identified" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="introduction" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    user_id, user_name, password, gender, wx_name, wx_img, time, type, identified, number
-  </sql>
-  <sql id="Blob_Column_List">
-    introduction
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="mjxm.pojo.User">
-    insert into user (user_id, user_name, password, 
-      gender, wx_name, wx_img, 
-      time, type, identified, 
-      number, introduction)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=VARCHAR}, #{wxName,jdbcType=VARCHAR}, #{wxImg,jdbcType=VARCHAR}, 
-      #{time,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, #{identified,jdbcType=INTEGER}, 
-      #{number,jdbcType=VARCHAR}, #{introduction,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="mjxm.pojo.User">
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="userName != null">
-        user_name,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="gender != null">
-        gender,
-      </if>
-      <if test="wxName != null">
-        wx_name,
-      </if>
-      <if test="wxImg != null">
-        wx_img,
-      </if>
-      <if test="time != null">
-        time,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="identified != null">
-        identified,
-      </if>
-      <if test="number != null">
-        number,
-      </if>
-      <if test="introduction != null">
-        introduction,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="wxName != null">
-        #{wxName,jdbcType=VARCHAR},
-      </if>
-      <if test="wxImg != null">
-        #{wxImg,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="identified != null">
-        #{identified,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        #{introduction,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="mjxm.pojo.User">
-    update user
-    <set>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="wxName != null">
-        wx_name = #{wxName,jdbcType=VARCHAR},
-      </if>
-      <if test="wxImg != null">
-        wx_img = #{wxImg,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        time = #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="identified != null">
-        identified = #{identified,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        number = #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        introduction = #{introduction,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="mjxm.pojo.User">
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      wx_name = #{wxName,jdbcType=VARCHAR},
-      wx_img = #{wxImg,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=INTEGER},
-      identified = #{identified,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR},
-      introduction = #{introduction,jdbcType=LONGVARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="mjxm.pojo.User">
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      wx_name = #{wxName,jdbcType=VARCHAR},
-      wx_img = #{wxImg,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=INTEGER},
-      identified = #{identified,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="mjxm.pojo.User">
-    <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="identified" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="mjxm.pojo.User">
-    <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="identified" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="introduction" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    user_id, user_name, password, gender, wx_name, wx_img, time, type, identified, number
-  </sql>
-  <sql id="Blob_Column_List">
-    introduction
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="mjxm.pojo.User">
-    insert into user (user_id, user_name, password, 
-      gender, wx_name, wx_img, 
-      time, type, identified, 
-      number, introduction)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=VARCHAR}, #{wxName,jdbcType=VARCHAR}, #{wxImg,jdbcType=VARCHAR}, 
-      #{time,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, #{identified,jdbcType=INTEGER}, 
-      #{number,jdbcType=VARCHAR}, #{introduction,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="mjxm.pojo.User">
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="userName != null">
-        user_name,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="gender != null">
-        gender,
-      </if>
-      <if test="wxName != null">
-        wx_name,
-      </if>
-      <if test="wxImg != null">
-        wx_img,
-      </if>
-      <if test="time != null">
-        time,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="identified != null">
-        identified,
-      </if>
-      <if test="number != null">
-        number,
-      </if>
-      <if test="introduction != null">
-        introduction,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="wxName != null">
-        #{wxName,jdbcType=VARCHAR},
-      </if>
-      <if test="wxImg != null">
-        #{wxImg,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="identified != null">
-        #{identified,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        #{introduction,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="mjxm.pojo.User">
-    update user
-    <set>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="wxName != null">
-        wx_name = #{wxName,jdbcType=VARCHAR},
-      </if>
-      <if test="wxImg != null">
-        wx_img = #{wxImg,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        time = #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="identified != null">
-        identified = #{identified,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        number = #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        introduction = #{introduction,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="mjxm.pojo.User">
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      wx_name = #{wxName,jdbcType=VARCHAR},
-      wx_img = #{wxImg,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=INTEGER},
-      identified = #{identified,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR},
-      introduction = #{introduction,jdbcType=LONGVARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="mjxm.pojo.User">
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      wx_name = #{wxName,jdbcType=VARCHAR},
-      wx_img = #{wxImg,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=INTEGER},
-      identified = #{identified,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="mjxm.pojo.User">
-    <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="identified" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="mjxm.pojo.User">
-    <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="identified" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="introduction" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    user_id, user_name, password, gender, wx_name, wx_img, time, type, identified, number
-  </sql>
-  <sql id="Blob_Column_List">
-    introduction
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="mjxm.pojo.User">
-    insert into user (user_id, user_name, password, 
-      gender, wx_name, wx_img, 
-      time, type, identified, 
-      number, introduction)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=VARCHAR}, #{wxName,jdbcType=VARCHAR}, #{wxImg,jdbcType=VARCHAR}, 
-      #{time,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, #{identified,jdbcType=INTEGER}, 
-      #{number,jdbcType=VARCHAR}, #{introduction,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="mjxm.pojo.User">
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="userName != null">
-        user_name,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="gender != null">
-        gender,
-      </if>
-      <if test="wxName != null">
-        wx_name,
-      </if>
-      <if test="wxImg != null">
-        wx_img,
-      </if>
-      <if test="time != null">
-        time,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="identified != null">
-        identified,
-      </if>
-      <if test="number != null">
-        number,
-      </if>
-      <if test="introduction != null">
-        introduction,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="wxName != null">
-        #{wxName,jdbcType=VARCHAR},
-      </if>
-      <if test="wxImg != null">
-        #{wxImg,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="identified != null">
-        #{identified,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        #{introduction,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="mjxm.pojo.User">
-    update user
-    <set>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="wxName != null">
-        wx_name = #{wxName,jdbcType=VARCHAR},
-      </if>
-      <if test="wxImg != null">
-        wx_img = #{wxImg,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        time = #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="identified != null">
-        identified = #{identified,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        number = #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        introduction = #{introduction,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="mjxm.pojo.User">
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      wx_name = #{wxName,jdbcType=VARCHAR},
-      wx_img = #{wxImg,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=INTEGER},
-      identified = #{identified,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR},
-      introduction = #{introduction,jdbcType=LONGVARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="mjxm.pojo.User">
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      wx_name = #{wxName,jdbcType=VARCHAR},
-      wx_img = #{wxImg,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=INTEGER},
-      identified = #{identified,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="mjxm.pojo.User">
-    <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="identified" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="mjxm.pojo.User">
-    <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="identified" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="introduction" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    user_id, user_name, password, gender, wx_name, wx_img, time, type, identified, number
-  </sql>
-  <sql id="Blob_Column_List">
-    introduction
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="mjxm.pojo.User">
-    insert into user (user_id, user_name, password, 
-      gender, wx_name, wx_img, 
-      time, type, identified, 
-      number, introduction)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=VARCHAR}, #{wxName,jdbcType=VARCHAR}, #{wxImg,jdbcType=VARCHAR}, 
-      #{time,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, #{identified,jdbcType=INTEGER}, 
-      #{number,jdbcType=VARCHAR}, #{introduction,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="mjxm.pojo.User">
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="userName != null">
-        user_name,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="gender != null">
-        gender,
-      </if>
-      <if test="wxName != null">
-        wx_name,
-      </if>
-      <if test="wxImg != null">
-        wx_img,
-      </if>
-      <if test="time != null">
-        time,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="identified != null">
-        identified,
-      </if>
-      <if test="number != null">
-        number,
-      </if>
-      <if test="introduction != null">
-        introduction,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="wxName != null">
-        #{wxName,jdbcType=VARCHAR},
-      </if>
-      <if test="wxImg != null">
-        #{wxImg,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="identified != null">
-        #{identified,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        #{introduction,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="mjxm.pojo.User">
-    update user
-    <set>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="wxName != null">
-        wx_name = #{wxName,jdbcType=VARCHAR},
-      </if>
-      <if test="wxImg != null">
-        wx_img = #{wxImg,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        time = #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="identified != null">
-        identified = #{identified,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        number = #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        introduction = #{introduction,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="mjxm.pojo.User">
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      wx_name = #{wxName,jdbcType=VARCHAR},
-      wx_img = #{wxImg,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=INTEGER},
-      identified = #{identified,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR},
-      introduction = #{introduction,jdbcType=LONGVARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="mjxm.pojo.User">
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      wx_name = #{wxName,jdbcType=VARCHAR},
-      wx_img = #{wxImg,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=INTEGER},
-      identified = #{identified,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="mjxm.pojo.User">
-    <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="identified" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="mjxm.pojo.User">
-    <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="identified" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="introduction" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    user_id, user_name, password, gender, wx_name, wx_img, time, type, identified, number
-  </sql>
-  <sql id="Blob_Column_List">
-    introduction
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="mjxm.pojo.User">
-    insert into user (user_id, user_name, password, 
-      gender, wx_name, wx_img, 
-      time, type, identified, 
-      number, introduction)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=VARCHAR}, #{wxName,jdbcType=VARCHAR}, #{wxImg,jdbcType=VARCHAR}, 
-      #{time,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, #{identified,jdbcType=INTEGER}, 
-      #{number,jdbcType=VARCHAR}, #{introduction,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="mjxm.pojo.User">
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="userName != null">
-        user_name,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="gender != null">
-        gender,
-      </if>
-      <if test="wxName != null">
-        wx_name,
-      </if>
-      <if test="wxImg != null">
-        wx_img,
-      </if>
-      <if test="time != null">
-        time,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="identified != null">
-        identified,
-      </if>
-      <if test="number != null">
-        number,
-      </if>
-      <if test="introduction != null">
-        introduction,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="wxName != null">
-        #{wxName,jdbcType=VARCHAR},
-      </if>
-      <if test="wxImg != null">
-        #{wxImg,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="identified != null">
-        #{identified,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        #{introduction,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="mjxm.pojo.User">
-    update user
-    <set>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="wxName != null">
-        wx_name = #{wxName,jdbcType=VARCHAR},
-      </if>
-      <if test="wxImg != null">
-        wx_img = #{wxImg,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        time = #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="identified != null">
-        identified = #{identified,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        number = #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        introduction = #{introduction,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="mjxm.pojo.User">
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      wx_name = #{wxName,jdbcType=VARCHAR},
-      wx_img = #{wxImg,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=INTEGER},
-      identified = #{identified,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR},
-      introduction = #{introduction,jdbcType=LONGVARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="mjxm.pojo.User">
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      wx_name = #{wxName,jdbcType=VARCHAR},
-      wx_img = #{wxImg,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=INTEGER},
-      identified = #{identified,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="mjxm.pojo.User">
-    <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="identified" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="mjxm.pojo.User">
-    <constructor>
-      <idArg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="wx_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="identified" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="introduction" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    user_id, user_name, password, gender, wx_name, wx_img, time, type, identified, number
-  </sql>
-  <sql id="Blob_Column_List">
-    introduction
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="mjxm.pojo.User">
-    insert into user (user_id, user_name, password, 
-      gender, wx_name, wx_img, 
-      time, type, identified, 
-      number, introduction)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=VARCHAR}, #{wxName,jdbcType=VARCHAR}, #{wxImg,jdbcType=VARCHAR}, 
-      #{time,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, #{identified,jdbcType=INTEGER}, 
-      #{number,jdbcType=VARCHAR}, #{introduction,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="mjxm.pojo.User">
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="userName != null">
-        user_name,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="gender != null">
-        gender,
-      </if>
-      <if test="wxName != null">
-        wx_name,
-      </if>
-      <if test="wxImg != null">
-        wx_img,
-      </if>
-      <if test="time != null">
-        time,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="identified != null">
-        identified,
-      </if>
-      <if test="number != null">
-        number,
-      </if>
-      <if test="introduction != null">
-        introduction,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="wxName != null">
-        #{wxName,jdbcType=VARCHAR},
-      </if>
-      <if test="wxImg != null">
-        #{wxImg,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="identified != null">
-        #{identified,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        #{introduction,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="mjxm.pojo.User">
-    update user
-    <set>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="gender != null">
-        gender = #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="wxName != null">
-        wx_name = #{wxName,jdbcType=VARCHAR},
-      </if>
-      <if test="wxImg != null">
-        wx_img = #{wxImg,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        time = #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="identified != null">
-        identified = #{identified,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        number = #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        introduction = #{introduction,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="mjxm.pojo.User">
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      wx_name = #{wxName,jdbcType=VARCHAR},
-      wx_img = #{wxImg,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=INTEGER},
-      identified = #{identified,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR},
-      introduction = #{introduction,jdbcType=LONGVARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="mjxm.pojo.User">
+  <update id="updateByPrimaryKey" parameterType="mjxm.pojo.User" >
     update user
     set user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},

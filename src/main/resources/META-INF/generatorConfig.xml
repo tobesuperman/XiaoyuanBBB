@@ -36,7 +36,7 @@
             <!-- 是否对model添加构造函数 -->
             <property name="constructorBased" value="true"/>
             <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
-            <property name="trimStrings" value="false"/>
+            <property name="trimStrings" value="true"/>
             <!-- 建立的Model对象是否不可改变  即生成的Model对象不会有setter方法，只有构造方法 -->
             <property name="immutable" value="false"/>
         </javaModelGenerator>

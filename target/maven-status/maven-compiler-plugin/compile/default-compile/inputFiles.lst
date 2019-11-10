@@ -1,8 +1,16 @@
-C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\controller\TestController.java
+C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\pojo\Requirement.java
 C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\service\UserService.java
+C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\mapping\InformationMapper.java
+C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\mapping\RequirementMapper.java
+C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\controller\TestController.java
 C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\pojo\User.java
 C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\service\TestService.java
 C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\mapping\UserMapper.java
+C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\pojo\Comment.java
+C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\pojo\Information.java
+C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\pojo\Record.java
 C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\service\impl\TestServiceImpl.java
 C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\service\impl\UserServiceImpl.java
+C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\mapping\CommentMapper.java
+C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\mapping\RecordMapper.java
 C:\Users\PC\Desktop\XiaoyuanBBB\src\main\java\mjxm\controller\MainController.java

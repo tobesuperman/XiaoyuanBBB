@@ -12,7 +12,7 @@
     <!--此处统一配置版本信息-->
     <properties>
         <!-- spring版本 -->
-        <springVersion>5.2.1.RELEASE</springVersion>
+        <springVersion>4.3.1.RELEASE</springVersion>
         <!-- mybatis版本 -->
         <mybatis.version>3.2.6</mybatis.version>
         <mysqlVersion>5.1.38</mysqlVersion>
@@ -85,7 +85,11 @@
 
 
         <!-- DataBase数据库连接 mysql包-->
-
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysqlVersion}</version>
+        </dependency>
 
         <!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 -->
         <dependency>

@@ -50,7 +50,7 @@ public class Requirement {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = title == null ? null : title.trim();
     }
 
     public Integer getType() {
@@ -66,7 +66,7 @@ public class Requirement {
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.address = address == null ? null : address.trim();
     }
 
     public Date getTime() {
@@ -106,6 +106,6 @@ public class Requirement {
     }
 
     public void setContent(String content) {
-        this.content = content;
+        this.content = content == null ? null : content.trim();
     }
 }

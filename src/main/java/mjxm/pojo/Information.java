@@ -36,7 +36,7 @@ public class Information {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
     }
 
     public String getAddress() {
@@ -44,7 +44,7 @@ public class Information {
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.address = address == null ? null : address.trim();
     }
 
     public Integer getDefaults() {

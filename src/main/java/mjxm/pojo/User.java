@@ -56,7 +56,7 @@ public class User {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getPassword() {
@@ -64,7 +64,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password == null ? null : password.trim();
     }
 
     public String getGender() {
@@ -72,7 +72,7 @@ public class User {
     }
 
     public void setGender(String gender) {
-        this.gender = gender;
+        this.gender = gender == null ? null : gender.trim();
     }
 
     public String getWxName() {
@@ -80,7 +80,7 @@ public class User {
     }
 
     public void setWxName(String wxName) {
-        this.wxName = wxName;
+        this.wxName = wxName == null ? null : wxName.trim();
     }
 
     public String getWxImg() {
@@ -88,7 +88,7 @@ public class User {
     }
 
     public void setWxImg(String wxImg) {
-        this.wxImg = wxImg;
+        this.wxImg = wxImg == null ? null : wxImg.trim();
     }
 
     public Date getTime() {
@@ -120,7 +120,7 @@ public class User {
     }
 
     public void setNumber(String number) {
-        this.number = number;
+        this.number = number == null ? null : number.trim();
     }
 
     public String getIntroduction() {
@@ -128,6 +128,6 @@ public class User {
     }
 
     public void setIntroduction(String introduction) {
-        this.introduction = introduction;
+        this.introduction = introduction == null ? null : introduction.trim();
     }
 }

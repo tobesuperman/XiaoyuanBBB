@@ -23,9 +23,14 @@ public class TestController {
     public @ResponseBody
     String insertOneUser() {
         User user = new User();
-        user.setId(2);
-        user.setUsername("邹超");
-        user.setAddress("华南理工大学");
+        user.setUserId(2);
+        user.setUserName("邹超");
+        user.setPassword("123456");
+        user.setGender("男");
+        user.setWxName("超仔仔");
+        user.setWxImg("https://image.baidu.com/");
+        user.setType(1);
+        user.setIdentified(2);
         userService.insert(user);
         return "success";
     }
