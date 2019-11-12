@@ -8,6 +8,7 @@ mjxm\mapping\RecordMapper.class
 mjxm\service\impl\UserServiceImpl.class
 mjxm\pojo\Requirement.class
 mjxm\pojo\User.class
+mjxm\controller\UserController.class
 mjxm\pojo\Record.class
 mjxm\pojo\Information.class
 mjxm\mapping\RequirementMapper.class

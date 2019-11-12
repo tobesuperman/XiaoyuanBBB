@@ -8,11 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-/**
- * Created by linziyu
- * On 6/17/2018.16:28 PM
- */
 @Controller
 @RequestMapping("/mybatistest")
 public class TestController {
@@ -31,7 +26,7 @@ public class TestController {
         user.setWxImg("https://image.baidu.com/");
         user.setType(1);
         user.setIdentified(2);
-        userService.insert(user);
+        userService.add(user);
         return "success";
     }
 }
