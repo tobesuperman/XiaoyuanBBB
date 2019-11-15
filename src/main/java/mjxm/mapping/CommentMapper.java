@@ -2,6 +2,8 @@ package mjxm.mapping;
 
 import mjxm.pojo.Comment;
 
+import java.util.List;
+
 public interface CommentMapper {
     int deleteByPrimaryKey(Integer commentId);
 
@@ -10,6 +12,10 @@ public interface CommentMapper {
     int insertSelective(Comment record);
 
     Comment selectByPrimaryKey(Integer commentId);
+
+    Comment selectCommentJoinUserAndRequirement(Integer commentId);
+
+    List<Comment> selectUserAllComment(Integer userId);
 
     int updateByPrimaryKeySelective(Comment record);
 

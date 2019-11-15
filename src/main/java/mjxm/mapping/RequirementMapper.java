@@ -2,6 +2,8 @@ package mjxm.mapping;
 
 import mjxm.pojo.Requirement;
 
+import java.util.List;
+
 public interface RequirementMapper {
     int deleteByPrimaryKey(Integer requirementId);
 
@@ -10,6 +12,10 @@ public interface RequirementMapper {
     int insertSelective(Requirement record);
 
     Requirement selectByPrimaryKey(Integer requirementId);
+
+    Requirement selectRequirementJoinUser(Integer requirementId);
+
+    List<Requirement> selectUserAllRequirement(Integer userId);
 
     int updateByPrimaryKeySelective(Requirement record);
 

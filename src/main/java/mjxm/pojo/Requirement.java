@@ -21,6 +21,8 @@ public class Requirement {
 
     private String content;
 
+//    private User user;
+
     public Requirement(Integer requirementId, String title, Integer type, String address, Date time, Integer visible, Integer status, Integer userId, String content) {
         this.requirementId = requirementId;
         this.title = title;
@@ -108,4 +110,8 @@ public class Requirement {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
+
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 }

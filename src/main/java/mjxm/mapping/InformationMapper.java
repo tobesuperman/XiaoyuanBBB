@@ -2,6 +2,8 @@ package mjxm.mapping;
 
 import mjxm.pojo.Information;
 
+import java.util.List;
+
 public interface InformationMapper {
     int deleteByPrimaryKey(Integer informationId);
 
@@ -10,6 +12,10 @@ public interface InformationMapper {
     int insertSelective(Information record);
 
     Information selectByPrimaryKey(Integer informationId);
+
+    Information selectInformationJoinUser(Integer informationId);
+
+    List<Information> selectUserAllInformation(Integer userId);
 
     int updateByPrimaryKeySelective(Information record);
 

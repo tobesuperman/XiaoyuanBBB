@@ -15,14 +15,27 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 用户注册
+     *
+     * @param username     用户名
+     * @param password     用户密码
+     * @param gender       用户性别
+     * @param wxName       用户微信名
+     * @param wxImg        用户微信头像（url）
+     * @param type         用户类型（学生/教师）
+     * @param identified   用户是否认证
+     * @param number       用户学号/教工号
+     * @param introduction 用户简介
+     * @return 提示信息
+     */
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public @ResponseBody
-    Map<String, String> insertUser(@RequestParam("username") String username, @RequestParam("password") String password,
-                          @RequestParam("gender") String gender, @RequestParam("wx_name") String wxName,
-                          @RequestParam("wx_img") String wxImg, @RequestParam("type") String type,
-                          @RequestParam("identified") String identified, @RequestParam("number") String number,
-                          @RequestParam("introduction") String introduction) {
-        System.out.println("---进入UserController---");
+    Map<String, String> register(@RequestParam("userName") String username, @RequestParam("password") String password,
+                                 @RequestParam("gender") String gender, @RequestParam("wxName") String wxName,
+                                 @RequestParam("wxImg") String wxImg, @RequestParam("type") String type,
+                                 @RequestParam("identified") String identified, @RequestParam("number") String number,
+                                 @RequestParam("introduction") String introduction) {
         User user = new User();
         user.setUserName(username);
         user.setPassword(password);

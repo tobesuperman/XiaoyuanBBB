@@ -1,116 +1,132 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="mjxm.mapping.CommentMapper" >
-  <resultMap id="BaseResultMap" type="mjxm.pojo.Comment" >
-    <constructor >
-      <idArg column="comment_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="about_comment_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="requirement_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="mjxm.pojo.Comment" >
-    <constructor >
-      <idArg column="comment_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="about_comment_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="requirement_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="mjxm.mapping.CommentMapper">
+    <resultMap id="BaseResultMap" type="mjxm.pojo.Comment">
+        <constructor>
+            <idArg column="comment_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="about_comment_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="requirement_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        </constructor>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="mjxm.pojo.Comment">
+        <constructor>
+            <idArg column="comment_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+            <arg column="about_comment_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="requirement_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="content" jdbcType="LONGVARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
     comment_id, time, about_comment_id, user_id, requirement_id
-  </sql>
-  <sql id="Blob_Column_List" >
+    </sql>
+    <sql id="Blob_Column_List">
     content
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from comment
-    where comment_id = #{commentId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from comment
+        where comment_id = #{commentId,jdbcType=INTEGER}
+    </select>
+    <select id="selectCommentJoinUserAndRequirement" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    select
+        c.*
+        from comment as c, user as u, requirement as r
+        where comment_id = #{commentId,jdbcType=INTEGER}
+        and c.user_id = u.user_id
+        and c.requirement_id = r.requirement_id
+    </select>
+    <select id="selectUserAllComment" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        c.*
+        from comment as c, user as u, requirement as r
+        where u.user_id = #{userId,jdbcType=INTEGER}
+        and c.user_id = u.user_id
+        and c.requirement_id = r.requirement_id
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from comment
     where comment_id = #{commentId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="mjxm.pojo.Comment" >
+    </delete>
+    <insert id="insert" parameterType="mjxm.pojo.Comment">
     insert into comment (comment_id, time, about_comment_id, 
       user_id, requirement_id, content
       )
     values (#{commentId,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{aboutCommentId,jdbcType=INTEGER}, 
       #{userId,jdbcType=INTEGER}, #{requirementId,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
       )
-  </insert>
-  <insert id="insertSelective" parameterType="mjxm.pojo.Comment" >
-    insert into comment
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="commentId != null" >
-        comment_id,
-      </if>
-      <if test="time != null" >
-        time,
-      </if>
-      <if test="aboutCommentId != null" >
-        about_comment_id,
-      </if>
-      <if test="userId != null" >
-        user_id,
-      </if>
-      <if test="requirementId != null" >
-        requirement_id,
-      </if>
-      <if test="content != null" >
-        content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="commentId != null" >
-        #{commentId,jdbcType=INTEGER},
-      </if>
-      <if test="time != null" >
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="aboutCommentId != null" >
-        #{aboutCommentId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="requirementId != null" >
-        #{requirementId,jdbcType=INTEGER},
-      </if>
-      <if test="content != null" >
-        #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="mjxm.pojo.Comment" >
-    update comment
-    <set >
-      <if test="time != null" >
-        time = #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="aboutCommentId != null" >
-        about_comment_id = #{aboutCommentId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="requirementId != null" >
-        requirement_id = #{requirementId,jdbcType=INTEGER},
-      </if>
-      <if test="content != null" >
-        content = #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where comment_id = #{commentId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="mjxm.pojo.Comment" >
+    </insert>
+    <insert id="insertSelective" parameterType="mjxm.pojo.Comment">
+        insert into comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="commentId != null">
+                comment_id,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="aboutCommentId != null">
+                about_comment_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="requirementId != null">
+                requirement_id,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="commentId != null">
+                #{commentId,jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="aboutCommentId != null">
+                #{aboutCommentId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="requirementId != null">
+                #{requirementId,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="mjxm.pojo.Comment">
+        update comment
+        <set>
+            <if test="time != null">
+                time = #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="aboutCommentId != null">
+                about_comment_id = #{aboutCommentId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="requirementId != null">
+                requirement_id = #{requirementId,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where comment_id = #{commentId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="mjxm.pojo.Comment">
     update comment
     set time = #{time,jdbcType=TIMESTAMP},
       about_comment_id = #{aboutCommentId,jdbcType=INTEGER},
@@ -118,8 +134,8 @@
       requirement_id = #{requirementId,jdbcType=INTEGER},
       content = #{content,jdbcType=LONGVARCHAR}
     where comment_id = #{commentId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="mjxm.pojo.Comment" >
+    </update>
+    <update id="updateByPrimaryKey" parameterType="mjxm.pojo.Comment">
     update comment
     set time = #{time,jdbcType=TIMESTAMP},
       about_comment_id = #{aboutCommentId,jdbcType=INTEGER},

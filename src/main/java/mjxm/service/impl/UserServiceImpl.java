@@ -6,6 +6,8 @@ import mjxm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -15,5 +17,24 @@ public class UserServiceImpl implements UserService {
     @Override
     public void register(User user) {
         userMapper.insert(user);
+    }
+
+    @Override
+    public boolean exists(int userId) {
+        return userMapper.selectByPrimaryKey(userId) == null;
+    }
+
+    @Override
+    public User find(int userId) {
+//        if (exists(userId)) {
+//            return userMapper.selectByPrimaryKey(userId);
+//        }
+//        return null;
+        return userMapper.selectByPrimaryKey(userId);
+    }
+
+    @Override
+    public List<User> findByName(String userName) {
+        return userMapper.selectByUserName(userName);
     }
 }

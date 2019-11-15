@@ -18,7 +18,7 @@
     <!--        </mvc:message-converters>-->
     <!--    </mvc:annotation-driven>-->
     <!-- 对模型视图名称的解析,在请求时模型视图名称添加前后缀 -->
-    <context:component-scan base-package="mjxm"/>
+    <context:component-scan base-package="mjxm.controller"/>
     <!-- 静态资源访问，方案2 (表示不对静态资源如CSS、JS、HTML等进行拦截) -->
     <mvc:default-servlet-handler/>
 

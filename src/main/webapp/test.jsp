@@ -7,17 +7,18 @@
         //ajax提交form表单的方式
         function addUser() {
             alert("---submit()函数执行了---");
-            var url = "http://xmyyzw.club:8080/xiaoyuanbbb/user/add";
+            var url = "http://xmyyzw.club:8080/xiaoyuanbbb/requirement/release";
             var jsonStr = {
-                username: $("#username").val(),
-                password: $("#password").val(),
-                gender: $("#gender").val(),
-                wx_name: $("#wx_name").val(),
-                wx_img: $("#wx_img").val(),
-                type: $("#type").val(),
-                identified: $("#identified").val(),
-                number: $("#number").val(),
-                introduction: $("#introduction").val()
+                // username: $("#username").val(),
+                // password: $("#password").val(),
+                // gender: $("#gender").val(),
+                // wx_name: $("#wx_name").val(),
+                // wx_img: $("#wx_img").val(),
+                // type: $("#type").val(),
+                // identified: $("#identified").val(),
+                // number: $("#number").val(),
+                // introduction: $("#introduction").val()
+                user_id: $("#username").val()
             };
             $.ajax({
                 type: "POST",
@@ -30,7 +31,8 @@
                     alert(json);
                 },
                 error: function (data) {
-                    alert(data);
+                    var json = JSON.stringify(data);
+                    alert(json);
                 }
             });
         }
