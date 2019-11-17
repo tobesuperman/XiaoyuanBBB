@@ -26,7 +26,7 @@ CREATE TABLE `user` (
   `gender` varchar(255) NOT NULL,
   `wx_name` varchar(255) DEFAULT NULL,
   `wx_img` varchar(255) DEFAULT NULL,
-  `time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `type` int(11) NOT NULL,
   `identified` int(11) NOT NULL,
   `number` varchar(255) DEFAULT NULL,

@@ -54,6 +54,25 @@
         where r.user_id = #{userId, jdbcType=INTEGER}
         and r.user_id = u.user_id
     </select>
+    <select id="selectAllRequirement" resultMap="ResultMapWithBLOBs">
+        select
+        r.*
+        from requirement as r, user as u
+        where r.user_id = u.user_id
+        and r.status = 1
+        <if test="title != null">
+            and r.title = #{title, jdbcType=VARCHAR}
+        </if>
+        <if test="type != null">
+            and r.type = #{type, jdbcType=INTEGER}
+        </if>
+        <if test="content != null">
+            and r.content = #{content, jdbcType=VARCHAR}
+        </if>
+        <if test="address != null">
+            and r.address = #{address, jdbcType=VARCHAR}
+        </if>
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from requirement
     where requirement_id = #{requirementId,jdbcType=INTEGER}
@@ -181,5 +200,10 @@
       status = #{status,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER}
     where requirement_id = #{requirementId,jdbcType=INTEGER}
-  </update>
+    </update>
+    <update id="updateRequirementStatus" parameterType="java.lang.Integer">
+    update requirement
+    set status = #{status,jdbcType=INTEGER}
+    where requirement_id = #{requirementId,jdbcType=INTEGER}
+    </update>
 </mapper>

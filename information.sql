@@ -24,7 +24,7 @@ CREATE TABLE `information` (
   `phone_number` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `defaults` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
   PRIMARY KEY (`information_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `information_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)

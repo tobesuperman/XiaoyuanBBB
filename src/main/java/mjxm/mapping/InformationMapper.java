@@ -7,6 +7,8 @@ import java.util.List;
 public interface InformationMapper {
     int deleteByPrimaryKey(Integer informationId);
 
+    int deleteAllInformation(Integer userId);
+
     int insert(Information record);
 
     int insertSelective(Information record);
@@ -20,4 +22,6 @@ public interface InformationMapper {
     int updateByPrimaryKeySelective(Information record);
 
     int updateByPrimaryKey(Information record);
+
+    int updateOtherInformation();
 }

@@ -25,11 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User find(int userId) {
-//        if (exists(userId)) {
-//            return userMapper.selectByPrimaryKey(userId);
-//        }
-//        return null;
+    public User findById(int userId) {
         return userMapper.selectByPrimaryKey(userId);
     }
 

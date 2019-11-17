@@ -11,4 +11,8 @@ public interface RequirementService {
     public Requirement findById(Integer requirementId);
 
     public List<Requirement> findUserAllRequirement(Integer userId);
+
+    public List<Requirement> findAllRequirement(String title, Integer type, String content, String address);
+
+    public int updateRequirementStatus(Integer requirementId, Integer status);
 }

@@ -9,7 +9,7 @@ public interface UserService {
 
     public boolean exists(int userId);
 
-    public User find(int userId);
+    public User findById(int userId);
 
     public List<User> findByName(String userName);
 }

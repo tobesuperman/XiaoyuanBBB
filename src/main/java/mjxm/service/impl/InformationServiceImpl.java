@@ -15,7 +15,18 @@ public class InformationServiceImpl implements InformationService {
 
     @Override
     public void add(Information information) {
+        if (information.getDefaults() == 1) {
+            informationMapper.updateOtherInformation();
+        }
         informationMapper.insert(information);
+    }
+
+    @Override
+    public int modify(Information information) {
+        if (information.getDefaults() == 1) {
+            informationMapper.updateOtherInformation();
+        }
+        return informationMapper.updateByPrimaryKey(information);
     }
 
     @Override
@@ -26,5 +37,15 @@ public class InformationServiceImpl implements InformationService {
     @Override
     public List<Information> findUserAllInformation(Integer userId) {
         return informationMapper.selectUserAllInformation(userId);
+    }
+
+    @Override
+    public int deleteById(Integer informationId) {
+        return informationMapper.deleteByPrimaryKey(informationId);
+    }
+
+    @Override
+    public int deleteAllInformation(Integer userId) {
+        return informationMapper.deleteAllInformation(userId);
     }
 }

@@ -37,6 +37,10 @@
     delete from information
     where information_id = #{informationId,jdbcType=INTEGER}
     </delete>
+    <delete id="deleteAllInformation" parameterType="java.lang.Integer">
+    delete from information
+    where user_id = #{userId,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="mjxm.pojo.Information">
     insert into information (information_id, phone_number, address, 
       defaults, user_id)
@@ -105,5 +109,9 @@
       defaults = #{defaults,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER}
     where information_id = #{informationId,jdbcType=INTEGER}
+    </update>
+    <update id="updateOtherInformation">
+    update information
+    set defaults = 2
     </update>
 </mapper>

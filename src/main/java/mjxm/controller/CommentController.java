@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -40,7 +39,7 @@ public class CommentController {
     public @ResponseBody
     Map<String, String> release(@RequestParam("userId") String userId, @RequestParam("requirementId") String requirementId,
                                 @RequestParam("content") String content, @RequestParam("aboutRequirementId") String aboutRequirementId) {
-        User user = userService.find(Integer.parseInt(userId));
+        User user = userService.findById(Integer.parseInt(userId));
         Requirement requirement = requirementService.findById(Integer.parseInt(requirementId));
         Map<String, String> map = new HashMap<>();
         // 计算查询结果占用内存大小以判断是否查询到用户和需求
@@ -68,7 +67,7 @@ public class CommentController {
     @RequestMapping(value = "all", method = RequestMethod.POST)
     public @ResponseBody
     Map<String, Map<Comment, Requirement>> all(@RequestParam("userId") String userId) {
-        User user = userService.find(Integer.parseInt(userId));
+        User user = userService.findById(Integer.parseInt(userId));
         Map<String, Map<Comment, Requirement>> map = new HashMap<>();
         // 计算查询结果占用内存大小以判断是否查询到用户和需求
         if (RamUsageEstimator.sizeOf(user) != 0) {

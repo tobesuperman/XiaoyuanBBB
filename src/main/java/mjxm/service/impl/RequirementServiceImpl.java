@@ -30,4 +30,14 @@ public class RequirementServiceImpl implements RequirementService {
     public List<Requirement> findUserAllRequirement(Integer userId) {
         return requirementMapper.selectUserAllRequirement(userId);
     }
+
+    @Override
+    public List<Requirement> findAllRequirement(String title, Integer type, String content, String address) {
+        return requirementMapper.selectAllRequirement(title, type, content, address);
+    }
+
+    @Override
+    public int updateRequirementStatus(Integer requirementId, Integer status) {
+        return requirementMapper.updateRequirementStatus(requirementId, status);
+    }
 }
