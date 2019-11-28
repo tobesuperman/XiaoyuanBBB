@@ -76,8 +76,8 @@ public class InformationController {
     /**
      * 用户修改联系方式
      *
-     * @param informationId 联系方式id
      * @param userId        用户id
+     * @param informationId 联系方式id
      * @param phoneNumber   用户手机号码
      * @param address       用户地址
      * @param defaults      是否为默认联系方式
@@ -85,7 +85,7 @@ public class InformationController {
      */
     @RequestMapping("modify")
     public @ResponseBody
-    Map<String, String> modify(@RequestParam("informationId") String informationId, @RequestParam("userId") String userId,
+    Map<String, String> modify(@RequestParam("userId") String userId, @RequestParam("informationId") String informationId,
                                @RequestParam("phoneNumber") String phoneNumber, @RequestParam("address") String address,
                                @RequestParam("defaults") String defaults) {
         User user = userService.findById(Integer.parseInt(userId));
@@ -109,13 +109,13 @@ public class InformationController {
     /**
      * 用户删除联系方式
      *
-     * @param informationId 联系方式id
      * @param userId        用户id
+     * @param informationId 联系方式id
      * @return 提示信息
      */
     @RequestMapping("delete")
     public @ResponseBody
-    Map<String, String> delete(@RequestParam("informationId") String informationId, @RequestParam("userId") String userId) {
+    Map<String, String> delete(@RequestParam("userId") String userId, @RequestParam("informationId") String informationId) {
         User user = userService.findById(Integer.parseInt(userId));
         Map<String, String> map = new HashMap<>();
         if (RamUsageEstimator.sizeOf(user) != 0) {
