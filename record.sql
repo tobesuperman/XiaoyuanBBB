@@ -25,8 +25,10 @@ CREATE TABLE `record` (
   `user_id` int(11) NOT NULL,
   `requirement_id` int(11) NOT NULL,
   PRIMARY KEY (`record_id`),
+  KEY `user_id` (`user_id`),
   KEY `requirement_id` (`requirement_id`),
-  CONSTRAINT `record_ibfk_1` FOREIGN KEY (`requirement_id`) REFERENCES `requirement` (`requirement_id`)
+  CONSTRAINT `record_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `record_ibfk_2` FOREIGN KEY (`requirement_id`) REFERENCES `requirement` (`requirement_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

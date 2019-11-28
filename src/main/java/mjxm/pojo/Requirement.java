@@ -17,13 +17,14 @@ public class Requirement {
 
     private Integer status;
 
-    private Integer userId;
+    private Integer releaserId;
+
+    private Integer receiverId;
 
     private String content;
 
-//    private User user;
 
-    public Requirement(Integer requirementId, String title, Integer type, String address, Date time, Integer visible, Integer status, Integer userId, String content) {
+    public Requirement(Integer requirementId, String title, Integer type, String address, Date time, Integer visible, Integer status, Integer releaserId, String content) {
         this.requirementId = requirementId;
         this.title = title;
         this.type = type;
@@ -31,7 +32,7 @@ public class Requirement {
         this.time = time;
         this.visible = visible;
         this.status = status;
-        this.userId = userId;
+        this.releaserId = releaserId;
         this.content = content;
     }
 
@@ -95,12 +96,20 @@ public class Requirement {
         this.status = status;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getReleaserId() {
+        return releaserId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setReleaserId(Integer releaserId) {
+        this.releaserId = releaserId;
+    }
+
+    public Integer getReceiverId() {
+        return receiverId;
+    }
+
+    public void setReceiverId(Integer receiverId) {
+        this.receiverId = receiverId;
     }
 
     public String getContent() {
@@ -111,7 +120,4 @@ public class Requirement {
         this.content = content == null ? null : content.trim();
     }
 
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
 }

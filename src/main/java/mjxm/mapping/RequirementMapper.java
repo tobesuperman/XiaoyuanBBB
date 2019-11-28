@@ -16,7 +16,9 @@ public interface RequirementMapper {
 
     Requirement selectRequirementJoinUser(Integer requirementId);
 
-    List<Requirement> selectUserAllRequirement(Integer userId);
+    List<Requirement> selectUserAllReleasedRequirement(Integer userId);
+
+    List<Requirement> selectUserAllReceivedRequirement(Integer userId);
 
     List<Requirement> selectAllRequirement(@Param("title") String title, @Param("type") Integer type,
                                            @Param("content") String content, @Param("address") String address);
@@ -27,5 +29,9 @@ public interface RequirementMapper {
 
     int updateByPrimaryKey(Requirement record);
 
-    int updateRequirementStatus(@Param("requirementId") Integer requirementId, @Param("status") Integer status);
+    int updateRequirementStatusToProcessing(@Param("requirementId") Integer requirementId, @Param("recieverId") Integer recieverId);
+
+    int updateRequirementStatusToCompleted(@Param("requirementId") Integer requirementId);
+
+    int updateRequirementStatusToCancelled(@Param("requirementId") Integer requirementId);
 }

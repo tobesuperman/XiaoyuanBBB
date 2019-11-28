@@ -25,13 +25,16 @@ CREATE TABLE `requirement` (
   `type` int(11) NOT NULL,
   `content` text NOT NULL,
   `address` varchar(255) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `visible` int(11) NOT NULL,
   `status` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `releaser_id` int(11) NOT NULL,
+  `receiver_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`requirement_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `requirement_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  KEY `releaser_id` (`releaser_id`),
+  KEY `receiver_id` (`receiver_id`),
+  CONSTRAINT `requirement_ibfk_1` FOREIGN KEY (`releaser_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `requirement_ibfk_2` FOREIGN KEY (`receiver_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

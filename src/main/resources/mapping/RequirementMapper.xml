@@ -10,7 +10,8 @@
             <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
             <arg column="visible" jdbcType="INTEGER" javaType="java.lang.Integer"/>
             <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-            <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="releaser_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="receiver_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         </constructor>
     </resultMap>
     <resultMap id="ResultMapWithBLOBs" type="mjxm.pojo.Requirement">
@@ -22,12 +23,13 @@
             <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
             <arg column="visible" jdbcType="INTEGER" javaType="java.lang.Integer"/>
             <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-            <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="releaser_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="receiver_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
             <arg column="content" jdbcType="LONGVARCHAR" javaType="java.lang.String"/>
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-    requirement_id, title, type, address, time, visible, status, user_id
+    requirement_id, title, type, address, time, visible, status, releaser_id, receiver_id
      </sql>
     <sql id="Blob_Column_List">
     content
@@ -45,20 +47,27 @@
         r.*
         from requirement as r, user as u
         where requirement_id = #{requirementId, jdbcType=INTEGER}
-        and r.user_id = u.user_id
+        and r.releaser_id = u.user_id
     </select>
-    <select id="selectUserAllRequirement" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+    <select id="selectUserAllReleasedRequirement" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
         select
         r.*
         from requirement as r, user as u
-        where r.user_id = #{userId, jdbcType=INTEGER}
-        and r.user_id = u.user_id
+        where r.releaser_id = #{releaserId, jdbcType=INTEGER}
+        and r.releaser_id = u.user_id
+    </select>
+    <select id="selectUserAllReceivedRequirement" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        r.*
+        from requirement as r, user as u
+        where r.receiver_id = #{receiverId, jdbcType=INTEGER}
+        and r.receiver_id = u.user_id
     </select>
     <select id="selectAllRequirement" resultMap="ResultMapWithBLOBs">
         select
         r.*
         from requirement as r, user as u
-        where r.user_id = u.user_id
+        where r.releaser_id = u.user_id
         and r.status = 1
         <if test="title != null">
             and r.title = #{title, jdbcType=VARCHAR}
@@ -80,11 +89,11 @@
     <insert id="insert" parameterType="mjxm.pojo.Requirement">
     insert into requirement (requirement_id, title, type, 
       address, time, visible, 
-      status, user_id, content
+      status, releaser_id, content
       )
     values (#{requirementId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
       #{address,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{visible,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+      #{status,jdbcType=INTEGER}, #{releaserId,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
       )
     </insert>
     <insert id="insertSelective" parameterType="mjxm.pojo.Requirement">
@@ -111,8 +120,8 @@
             <if test="status != null">
                 status,
             </if>
-            <if test="userId != null">
-                user_id,
+            <if test="releaserId != null">
+                releaser_id,
             </if>
             <if test="content != null">
                 content,
@@ -140,8 +149,8 @@
             <if test="status != null">
                 #{status,jdbcType=INTEGER},
             </if>
-            <if test="userId != null">
-                #{userId,jdbcType=INTEGER},
+            <if test="releaserId != null">
+                #{releaserId,jdbcType=INTEGER},
             </if>
             <if test="content != null">
                 #{content,jdbcType=LONGVARCHAR},
@@ -169,8 +178,8 @@
             <if test="status != null">
                 status = #{status,jdbcType=INTEGER},
             </if>
-            <if test="userId != null">
-                user_id = #{userId,jdbcType=INTEGER},
+            <if test="releaserId != null">
+                releaser_id = #{releaserId,jdbcType=INTEGER},
             </if>
             <if test="content != null">
                 content = #{content,jdbcType=LONGVARCHAR},
@@ -186,7 +195,7 @@
       time = #{time,jdbcType=TIMESTAMP},
       visible = #{visible,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
+      releaser_id = #{releaserId,jdbcType=INTEGER},
       content = #{content,jdbcType=LONGVARCHAR}
     where requirement_id = #{requirementId,jdbcType=INTEGER}
     </update>
@@ -198,12 +207,23 @@
       time = #{time,jdbcType=TIMESTAMP},
       visible = #{visible,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER}
+      releaser_id = #{releaserId,jdbcType=INTEGER}
     where requirement_id = #{requirementId,jdbcType=INTEGER}
     </update>
-    <update id="updateRequirementStatus" parameterType="java.lang.Integer">
+    <update id="updateRequirementStatusToProcessing" parameterType="java.lang.Integer">
     update requirement
-    set status = #{status,jdbcType=INTEGER}
+    set status = 2
+    and receiver_id = #{recieverId,jdbcType=INTEGER}
+    where requirement_id = #{requirementId,jdbcType=INTEGER}
+    </update>
+    <update id="updateRequirementStatusToCompleted" parameterType="java.lang.Integer">
+    update requirement
+    set status = 3
+    where requirement_id = #{requirementId,jdbcType=INTEGER}
+    </update>
+    <update id="updateRequirementStatusToCancelled" parameterType="java.lang.Integer">
+    update requirement
+    set status = 4
     where requirement_id = #{requirementId,jdbcType=INTEGER}
     </update>
 </mapper>

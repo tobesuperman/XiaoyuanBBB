@@ -51,7 +51,7 @@ public class RequirementController {
             requirement.setAddress(address);
             requirement.setVisible(Integer.parseInt(visible));
             requirement.setStatus(1);
-            requirement.setUserId(Integer.parseInt(userId));
+            requirement.setReleaserId(Integer.parseInt(userId));
             requirementService.release(requirement);
             map.put("result", "success");
             return map;
@@ -61,19 +61,42 @@ public class RequirementController {
     }
 
     /**
-     * 用户查看已发布的需求
+     * 用户（作为发布者）查看已发布的需求
      *
      * @param userId 用户id
      * @return 需求
      */
-    @RequestMapping(value = "userAll", method = RequestMethod.POST)
+    @RequestMapping(value = "userAllReleased", method = RequestMethod.POST)
     public @ResponseBody
-    Map<String, List<Requirement>> userAll(@RequestParam("userId") String userId) {
+    Map<String, List<Requirement>> userAllReleased(@RequestParam("userId") String userId) {
         User user = userService.findById(Integer.parseInt(userId));
         Map<String, List<Requirement>> map = new HashMap<>();
         // 计算查询结果占用内存大小以判断是否查询到用户
         if (RamUsageEstimator.sizeOf(user) != 0) {
-            List<Requirement> list = requirementService.findUserAllRequirement(Integer.parseInt(userId));
+            List<Requirement> list = requirementService.findUserAllReleasedRequirement(Integer.parseInt(userId));
+            if (list.size() != 0) {
+                map.put("result", list);
+                return map;
+            }
+        }
+        map.put("result", null);
+        return map;
+    }
+
+    /**
+     * 用户（作为接受者）查看已接受的需求
+     *
+     * @param userId 用户id
+     * @return 需求
+     */
+    @RequestMapping(value = "userAllReceived", method = RequestMethod.POST)
+    public @ResponseBody
+    Map<String, List<Requirement>> userAllReceived(@RequestParam("userId") String userId) {
+        User user = userService.findById(Integer.parseInt(userId));
+        Map<String, List<Requirement>> map = new HashMap<>();
+        // 计算查询结果占用内存大小以判断是否查询到用户
+        if (RamUsageEstimator.sizeOf(user) != 0) {
+            List<Requirement> list = requirementService.findUserAllReleasedRequirement(Integer.parseInt(userId));
             if (list.size() != 0) {
                 map.put("result", list);
                 return map;
@@ -113,6 +136,29 @@ public class RequirementController {
     }
 
     /**
+     * 用户接受需求
+     *
+     * @param requirementId 需求id
+     * @return 提示信息
+     */
+    @RequestMapping(value = "process", method = RequestMethod.POST)
+    public @ResponseBody
+    Map<String, String> process(@RequestParam("userId") String userId, @RequestParam("requirementId") String requirementId) {
+        User user = userService.findById(Integer.parseInt(userId));
+        Requirement requirement = requirementService.findById(Integer.parseInt(requirementId));
+        Map<String, String> map = new HashMap<>();
+        // 计算查询结果占用内存大小以判断是否查询到需求
+        if (RamUsageEstimator.sizeOf(user) != 0 && RamUsageEstimator.sizeOf(requirement) != 0) {
+            if (requirementService.updateRequirementToProcessing(Integer.parseInt(userId), Integer.parseInt(requirementId)) == 1) {
+                map.put("result", "success");
+                return map;
+            }
+        }
+        map.put("result", "error");
+        return map;
+    }
+
+    /**
      * 需求完成
      *
      * @param requirementId 需求id
@@ -125,7 +171,7 @@ public class RequirementController {
         Map<String, String> map = new HashMap<>();
         // 计算查询结果占用内存大小以判断是否查询到需求
         if (RamUsageEstimator.sizeOf(requirement) != 0) {
-            if (requirementService.updateRequirementStatus(Integer.parseInt(requirementId), 2) == 1) {
+            if (requirementService.updateRequirementToCompleted(Integer.parseInt(requirementId)) == 1) {
                 map.put("result", "success");
                 return map;
             }
@@ -149,7 +195,7 @@ public class RequirementController {
         Map<String, String> map = new HashMap<>();
         // 计算查询结果占用内存大小以判断是否查询到需求
         if (RamUsageEstimator.sizeOf(user) != 0 && RamUsageEstimator.sizeOf(requirement) != 0) {
-            if (requirementService.updateRequirementStatus(Integer.parseInt(requirementId), 3) == 1) {
+            if (requirementService.updateRequirementToCancelled(Integer.parseInt(requirementId)) == 1) {
                 map.put("result", "success");
                 return map;
             }

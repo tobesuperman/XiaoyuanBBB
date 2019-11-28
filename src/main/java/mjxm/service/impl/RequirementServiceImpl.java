@@ -27,9 +27,15 @@ public class RequirementServiceImpl implements RequirementService {
     }
 
     @Override
-    public List<Requirement> findUserAllRequirement(Integer userId) {
-        return requirementMapper.selectUserAllRequirement(userId);
+    public List<Requirement> findUserAllReleasedRequirement(Integer userId) {
+        return requirementMapper.selectUserAllReleasedRequirement(userId);
     }
+
+    @Override
+    public List<Requirement> findUserAllReceivedRequirement(Integer userId) {
+        return requirementMapper.selectUserAllReceivedRequirement(userId);
+    }
+
 
     @Override
     public List<Requirement> findAllRequirement(String title, Integer type, String content, String address) {
@@ -37,7 +43,17 @@ public class RequirementServiceImpl implements RequirementService {
     }
 
     @Override
-    public int updateRequirementStatus(Integer requirementId, Integer status) {
-        return requirementMapper.updateRequirementStatus(requirementId, status);
+    public int updateRequirementToProcessing(Integer userId, Integer requirementId) {
+        return requirementMapper.updateRequirementStatusToProcessing(requirementId, userId);
+    }
+
+    @Override
+    public int updateRequirementToCompleted(Integer requirementId) {
+        return requirementMapper.updateRequirementStatusToCompleted(requirementId);
+    }
+
+    @Override
+    public int updateRequirementToCancelled(Integer requirementId) {
+        return requirementMapper.updateRequirementStatusToCancelled(requirementId);
     }
 }
