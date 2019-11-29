@@ -15,8 +15,33 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public void register(User user) {
-        userMapper.insert(user);
+    public int register(User user) {
+        return userMapper.insert(user);
+    }
+
+    @Override
+    public int checkUserName(String userName) {
+        return userMapper.countByUserName(userName);
+    }
+
+    @Override
+    public int login(String userName, String password) {
+        return userMapper.selectByUserNameAndPassword(userName, password);
+    }
+
+    @Override
+    public int logout(int userId) {
+        return userMapper.deleteByPrimaryKey(userId);
+    }
+
+    @Override
+    public int weixinBinding(int userId, String wxName, String wxImg) {
+        return userMapper.updateWxNameAndWxImg(userId, wxName, wxImg);
+    }
+
+    @Override
+    public int identify(int userId, String number) {
+        return userMapper.updateIdentifiedAndNumber(userId, number);
     }
 
     @Override

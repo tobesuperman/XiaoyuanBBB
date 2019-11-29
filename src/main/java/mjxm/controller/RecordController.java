@@ -43,7 +43,7 @@ public class RecordController {
         Requirement requirement = requirementService.findById(Integer.parseInt(requirementId));
         Map<String, String> map = new HashMap<>();
         // 计算查询结果占用内存大小以判断是否查询到用户和需求
-        if (RamUsageEstimator.sizeOf(user) != 0 && RamUsageEstimator.sizeOf(requirementId) != 0) {
+        if (RamUsageEstimator.sizeOf(user) != 0 && RamUsageEstimator.sizeOf(requirement) != 0) {
             Record record = recordService.findByUserAndRequirement(Integer.parseInt(userId), Integer.parseInt(requirementId));
             if (RamUsageEstimator.sizeOf(record) != 0) {
                 // 浏览记录存在则更新时间
