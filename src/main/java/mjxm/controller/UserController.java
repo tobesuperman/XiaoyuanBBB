@@ -19,7 +19,7 @@ public class UserController {
     /**
      * 用户注册
      *
-     * @param username     用户名
+     * @param userName     用户名
      * @param password     用户密码
      * @param gender       用户性别
      * @param type         用户类型（学生/教师）
@@ -29,11 +29,11 @@ public class UserController {
      */
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public @ResponseBody
-    Map<String, Integer> register(@RequestParam("userName") String username, @RequestParam("password") String password,
+    Map<String, Integer> register(@RequestParam("userName") String userName, @RequestParam("password") String password,
                                   @RequestParam("gender") String gender, @RequestParam("type") String type,
                                   @RequestParam("identified") String identified, @RequestParam("introduction") String introduction) {
         User user = new User();
-        user.setUserName(username);
+        user.setUserName(userName);
         user.setPassword(password);
         user.setGender(gender);
         if (type.equals("学生")) user.setType(1);
@@ -49,7 +49,7 @@ public class UserController {
     }
 
     /**
-     * 检查用户是否可用
+     * 检查用户名是否可用
      *
      * @param userName 用户名
      * @return 提示信息
