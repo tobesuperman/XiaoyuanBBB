@@ -5,38 +5,26 @@ import java.util.Date;
 public class User {
     private Integer userId;
 
-    private String userName;
-
-    private String password;
-
-    private String gender;
-
     private String wxName;
 
     private String wxImg;
+
+    private String gender;
 
     private Date time;
 
     private Integer type;
 
-    private Integer identified;
+    private Integer studentId;
 
-    private String number;
-
-    private String introduction;
-
-    public User(Integer userId, String userName, String password, String gender, String wxName, String wxImg, Date time, Integer type, Integer identified, String number, String introduction) {
+    public User(Integer userId, String gender, String wxName, String wxImg, Date time, Integer type, Integer studentId) {
         this.userId = userId;
-        this.userName = userName;
-        this.password = password;
-        this.gender = gender;
         this.wxName = wxName;
         this.wxImg = wxImg;
+        this.gender = gender;
         this.time = time;
         this.type = type;
-        this.identified = identified;
-        this.number = number;
-        this.introduction = introduction;
+        this.studentId = studentId;
     }
 
     public User() {
@@ -49,30 +37,6 @@ public class User {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender == null ? null : gender.trim();
     }
 
     public String getWxName() {
@@ -91,6 +55,14 @@ public class User {
         this.wxImg = wxImg == null ? null : wxImg.trim();
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender == null ? null : gender.trim();
+    }
+
     public Date getTime() {
         return time;
     }
@@ -107,27 +79,11 @@ public class User {
         this.type = type;
     }
 
-    public Integer getIdentified() {
-        return identified;
+    public Integer getStudentId() {
+        return studentId;
     }
 
-    public void setIdentified(Integer identified) {
-        this.identified = identified;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number == null ? null : number.trim();
-    }
-
-    public String getIntroduction() {
-        return introduction;
-    }
-
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction == null ? null : introduction.trim();
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 }

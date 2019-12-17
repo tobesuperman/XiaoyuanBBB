@@ -96,11 +96,31 @@ public class RequirementController {
         Map<String, List<Requirement>> map = new HashMap<>();
         // 计算查询结果占用内存大小以判断是否查询到用户
         if (RamUsageEstimator.sizeOf(user) != 0) {
-            List<Requirement> list = requirementService.findUserAllReleasedRequirement(Integer.parseInt(userId));
+            List<Requirement> list = requirementService.findUserAllReceivedRequirement(Integer.parseInt(userId));
             if (list.size() != 0) {
                 map.put("result", list);
                 return map;
             }
+        }
+        map.put("result", null);
+        return map;
+    }
+
+    /**
+     * 用户查看指定需求
+     *
+     * @param userId        用户id
+     * @param requirementId 需求id
+     * @return 需求
+     */
+    @RequestMapping(value = "content", method = RequestMethod.POST)
+    public @ResponseBody
+    Map<String, Requirement> content(@RequestParam("userId") String userId, @RequestParam("requirementId") String requirementId) {
+        User user = userService.findById(Integer.parseInt(userId));
+        Map<String, Requirement> map = new HashMap<>();
+        // 计算查询结果占用内存大小以判断是否查询到用户
+        if (RamUsageEstimator.sizeOf(user) != 0) {
+            map.put("result", requirementService.findById(Integer.parseInt(requirementId)));
         }
         map.put("result", null);
         return map;

@@ -21,17 +21,15 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `gender` varchar(255) NOT NULL,
   `wx_name` varchar(255) DEFAULT NULL,
   `wx_img` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `type` int(11) NOT NULL,
-  `identified` int(11) NOT NULL,
-  `number` varchar(255) DEFAULT NULL,
-  `introduction` text,
-  PRIMARY KEY (`user_id`)
+  `type` int(11) DEFAULT 1 NOT NULL,
+  `student_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`),
+  KEY `student_id` (`student_id`),
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

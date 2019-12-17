@@ -8,9 +8,9 @@ import java.util.List;
 public interface RequirementMapper {
     int deleteByPrimaryKey(Integer requirementId);
 
-    int insert(Requirement record);
+    int insert(Requirement requirement);
 
-    int insertSelective(Requirement record);
+    int insertSelective(Requirement requirement);
 
     Requirement selectByPrimaryKey(Integer requirementId);
 
@@ -23,11 +23,11 @@ public interface RequirementMapper {
     List<Requirement> selectAllRequirement(@Param("title") String title, @Param("type") Integer type,
                                            @Param("content") String content, @Param("address") String address);
 
-    int updateByPrimaryKeySelective(Requirement record);
+    int updateByPrimaryKeySelective(Requirement requirement);
 
-    int updateByPrimaryKeyWithBLOBs(Requirement record);
+    int updateByPrimaryKeyWithBLOBs(Requirement requirement);
 
-    int updateByPrimaryKey(Requirement record);
+    int updateByPrimaryKey(Requirement requirement);
 
     int updateRequirementStatusToProcessing(@Param("requirementId") Integer requirementId, @Param("recieverId") Integer recieverId);
 

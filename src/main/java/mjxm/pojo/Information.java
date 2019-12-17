@@ -3,19 +3,24 @@ package mjxm.pojo;
 public class Information {
     private Integer informationId;
 
-    private String phoneNumber;
+    private String number;
+
+    private String name;
+
+    private String department;
+
+    private String school;
 
     private String address;
 
-    private Integer defaults;
+    private String phoneNumber;
 
     private Integer userId;
 
-    public Information(Integer informationId, String phoneNumber, String address, Integer defaults, Integer userId) {
+    public Information(Integer informationId, String phoneNumber, String address, Integer userId) {
         this.informationId = informationId;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.defaults = defaults;
         this.userId = userId;
     }
 
@@ -31,12 +36,36 @@ public class Information {
         this.informationId = informationId;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getNumber() {
+        return number;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
+    public void setNumber(String number) {
+        this.number = number == null ? null : number.trim();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department == null ? null : department.trim();
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school == null ? null : school.trim();
     }
 
     public String getAddress() {
@@ -47,12 +76,12 @@ public class Information {
         this.address = address == null ? null : address.trim();
     }
 
-    public Integer getDefaults() {
-        return defaults;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setDefaults(Integer defaults) {
-        this.defaults = defaults;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
     }
 
     public Integer getUserId() {

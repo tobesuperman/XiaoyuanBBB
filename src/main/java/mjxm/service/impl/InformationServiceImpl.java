@@ -13,39 +13,24 @@ public class InformationServiceImpl implements InformationService {
     @Autowired
     private InformationMapper informationMapper;
 
+
     @Override
-    public void add(Information information) {
-        if (information.getDefaults() == 1) {
-            informationMapper.updateOtherInformation();
-        }
-        informationMapper.insert(information);
+    public int add(Information information) {
+        return informationMapper.insertSelective(information);
     }
 
     @Override
     public int modify(Information information) {
-        if (information.getDefaults() == 1) {
-            informationMapper.updateOtherInformation();
-        }
-        return informationMapper.updateByPrimaryKey(information);
+        return informationMapper.updateByPrimaryKeySelective(information);
     }
 
     @Override
-    public Information findById(Integer informationId) {
-        return informationMapper.selectInformationJoinUser(informationId);
+    public Information findByUser(Integer userId) {
+        return informationMapper.selectByUser(userId);
     }
 
     @Override
-    public List<Information> findUserAllInformation(Integer userId) {
-        return informationMapper.selectUserAllInformation(userId);
-    }
-
-    @Override
-    public int deleteById(Integer informationId) {
-        return informationMapper.deleteByPrimaryKey(informationId);
-    }
-
-    @Override
-    public int deleteAllInformation(Integer userId) {
-        return informationMapper.deleteAllInformation(userId);
+    public int deleteByUser(Integer userId) {
+        return informationMapper.deleteByUser(userId);
     }
 }

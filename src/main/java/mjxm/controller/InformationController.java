@@ -2,8 +2,10 @@ package mjxm.controller;
 
 import com.carrotsearch.sizeof.RamUsageEstimator;
 import mjxm.pojo.Information;
+import mjxm.pojo.Student;
 import mjxm.pojo.User;
 import mjxm.service.InformationService;
+import mjxm.service.StudentService;
 import mjxm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -22,51 +23,31 @@ public class InformationController {
     private InformationService informationService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private StudentService studentService;
 
     /**
-     * 用户添加联系方式
-     *
-     * @param userId      用户id
-     * @param phoneNumber 用户手机号码
-     * @param address     用户地址
-     * @param defaults    是否为默认联系方式
-     * @return 提示信息
-     */
-    @RequestMapping("add")
-    public @ResponseBody
-    Map<String, String> add(@RequestParam("userId") String userId, @RequestParam("phoneNumber") String phoneNumber,
-                            @RequestParam("address") String address, @RequestParam("defaults") String defaults) {
-        User user = userService.findById(Integer.parseInt(userId));
-        Map<String, String> map = new HashMap<>();
-        // 计算查询结果占用内存大小以判断是否查询到用户
-        if (RamUsageEstimator.sizeOf(user) != 0) {
-            Information information = new Information();
-            information.setUserId(Integer.parseInt(userId));
-            information.setPhoneNumber(phoneNumber);
-            information.setAddress(address);
-            information.setDefaults(Integer.parseInt(defaults));
-            informationService.add(information);
-            map.put("result", "success");
-            return map;
-        }
-        map.put("result", "success");
-        return map;
-    }
-
-    /**
-     * 用户查看已添加的联系方式
+     * 用户查看信息
      *
      * @param userId 用户id
-     * @return 联系方式
+     * @return 用户信息
      */
     @RequestMapping("all")
     public @ResponseBody
-    Map<String, List<Information>> all(@RequestParam("userId") String userId) {
+    Map<String, Information> all(@RequestParam("userId") String userId) {
         User user = userService.findById(Integer.parseInt(userId));
-        Map<String, List<Information>> map = new HashMap<>();
+        Map<String, Information> map = new HashMap<>();
+        Information information;
         if (RamUsageEstimator.sizeOf(user) != 0) {
-            List<Information> list = informationService.findUserAllInformation(Integer.parseInt(userId));
-            map.put("result", list);
+            information = informationService.findByUser(Integer.parseInt(userId));
+            Student student = studentService.findByUser(Integer.parseInt(userId));
+            if (RamUsageEstimator.sizeOf(information) == 0) {
+                information.setNumber(student.getNumber());
+                information.setName(student.getName());
+                information.setDepartment(student.getDepartment());
+                information.setSchool(student.getSchool());
+            }
+            map.put("result", information);
             return map;
         }
         map.put("result", null);
@@ -74,75 +55,43 @@ public class InformationController {
     }
 
     /**
-     * 用户修改联系方式
+     * 用户修改信息
      *
-     * @param userId        用户id
-     * @param informationId 联系方式id
-     * @param phoneNumber   用户手机号码
-     * @param address       用户地址
-     * @param defaults      是否为默认联系方式
+     * @param userId      用户id
+     * @param number      用户学号
+     * @param name        用户姓名
+     * @param department  用户学院
+     * @param school      用户学校
+     * @param address     用户地址
+     * @param phoneNumber 用户手机号码
      * @return 提示信息
      */
     @RequestMapping("modify")
     public @ResponseBody
-    Map<String, String> modify(@RequestParam("userId") String userId, @RequestParam("informationId") String informationId,
-                               @RequestParam("phoneNumber") String phoneNumber, @RequestParam("address") String address,
-                               @RequestParam("defaults") String defaults) {
+    Map<String, String> modify(@RequestParam("userId") String userId, @RequestParam("number") String number,
+                               @RequestParam("name") String name, @RequestParam("department") String department,
+                               @RequestParam("school") String school, @RequestParam("address") String address,
+                               @RequestParam("phoneNumber") String phoneNumber) {
         User user = userService.findById(Integer.parseInt(userId));
         Map<String, String> map = new HashMap<>();
         if (RamUsageEstimator.sizeOf(user) != 0) {
-            Information information = informationService.findById(Integer.parseInt(informationId));
+            Information information = informationService.findByUser(Integer.parseInt(userId));
+            information.setPhoneNumber(phoneNumber);
+            information.setAddress(address);
             if (RamUsageEstimator.sizeOf(information) != 0) {
-                information.setPhoneNumber(phoneNumber);
-                information.setAddress(address);
-                information.setDefaults(Integer.parseInt(defaults));
                 if (informationService.modify(information) == 1) {
                     map.put("result", "success");
                     return map;
                 }
-            }
-        }
-        map.put("result", "error");
-        return map;
-    }
-
-    /**
-     * 用户删除联系方式
-     *
-     * @param userId        用户id
-     * @param informationId 联系方式id
-     * @return 提示信息
-     */
-    @RequestMapping("delete")
-    public @ResponseBody
-    Map<String, String> delete(@RequestParam("userId") String userId, @RequestParam("informationId") String informationId) {
-        User user = userService.findById(Integer.parseInt(userId));
-        Map<String, String> map = new HashMap<>();
-        if (RamUsageEstimator.sizeOf(user) != 0) {
-            if (informationService.deleteById(Integer.parseInt(informationId)) == 1) {
-                map.put("result", "error");
-                return map;
-            }
-        }
-        map.put("result", "error");
-        return map;
-    }
-
-    /**
-     * 用户删除所有联系方式
-     *
-     * @param userId 用户id
-     * @return 提示信息
-     */
-    @RequestMapping("deleteAll")
-    public @ResponseBody
-    Map<String, String> deleteAll(@RequestParam("userId") String userId) {
-        User user = userService.findById(Integer.parseInt(userId));
-        Map<String, String> map = new HashMap<>();
-        if (RamUsageEstimator.sizeOf(user) != 0) {
-            if (informationService.deleteAllInformation(Integer.parseInt(userId)) > 0) {
-                map.put("result", "success");
-                return map;
+            } else {
+                information.setNumber(number);
+                information.setName(name);
+                information.setDepartment(department);
+                information.setSchool(school);
+                if (informationService.add(information) == 1) {
+                    map.put("result", "success");
+                    return map;
+                }
             }
         }
         map.put("result", "error");

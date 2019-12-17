@@ -4,14 +4,17 @@
     <resultMap id="BaseResultMap" type="mjxm.pojo.Information">
         <constructor>
             <idArg column="information_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-            <arg column="phone_number" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="number" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="department" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="school" jdbcType="VARCHAR" javaType="java.lang.String"/>
             <arg column="address" jdbcType="VARCHAR" javaType="java.lang.String"/>
-            <arg column="defaults" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="phone_number" jdbcType="VARCHAR" javaType="java.lang.String"/>
             <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-    information_id, phone_number, address, defaults, user_id
+    number, name, deaprtment, school, information_id, phone_number, address, user_id
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -19,33 +22,26 @@
         from information
         where information_id = #{informationId,jdbcType=INTEGER}
     </select>
-    <select id="selectInformationJoinUser" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <select id="selectByUser" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         i.*
         from information as i, user as u
-        where information_id = #{informationId,jdbcType=INTEGER}
-        and i.user_id = u.user_id
-    </select>
-    <select id="selectUserAllInformation" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        i.*
-        from information as i, user as u
-        where i.user_id = #{userId, jdbcType=INTEGER}
+        where user_id = #{userId,jdbcType=INTEGER}
         and i.user_id = u.user_id
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from information
     where information_id = #{informationId,jdbcType=INTEGER}
     </delete>
-    <delete id="deleteAllInformation" parameterType="java.lang.Integer">
+    <delete id="deleteByUser" parameterType="java.lang.Integer">
     delete from information
     where user_id = #{userId,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="mjxm.pojo.Information">
-    insert into information (information_id, phone_number, address, 
-      defaults, user_id)
-    values (#{informationId,jdbcType=INTEGER}, #{phoneNumber,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{defaults,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER})
+    insert into information (information_id, number, name, department, school, address, phone_number, user_id)
+    values (#{informationId,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR},
+      #{address,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="mjxm.pojo.Information">
         insert into information
@@ -53,14 +49,23 @@
             <if test="informationId != null">
                 information_id,
             </if>
-            <if test="phoneNumber != null">
-                phone_number,
+            <if test="number != null">
+                number,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="department != null">
+                department,
+            </if>
+            <if test="school != null">
+                school,
             </if>
             <if test="address != null">
                 address,
             </if>
-            <if test="defaults != null">
-                defaults,
+            <if test="phoneNumber != null">
+                phone_number,
             </if>
             <if test="userId != null">
                 user_id,
@@ -70,14 +75,23 @@
             <if test="informationId != null">
                 #{informationId,jdbcType=INTEGER},
             </if>
-            <if test="phoneNumber != null">
-                #{phoneNumber,jdbcType=VARCHAR},
+            <if test="number != null">
+                #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="department != null">
+                #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="school != null">
+                #{school,jdbcType=VARCHAR},
             </if>
             <if test="address != null">
                 #{address,jdbcType=VARCHAR},
             </if>
-            <if test="defaults != null">
-                #{defaults,jdbcType=INTEGER},
+            <if test="phoneNumber != null">
+                #{phoneNumber,jdbcType=VARCHAR},
             </if>
             <if test="userId != null">
                 #{userId,jdbcType=INTEGER},
@@ -87,14 +101,23 @@
     <update id="updateByPrimaryKeySelective" parameterType="mjxm.pojo.Information">
         update information
         <set>
-            <if test="phoneNumber != null">
-                phone_number = #{phoneNumber,jdbcType=VARCHAR},
+            <if test="number != null">
+                number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="department != null">
+                department = #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="school != null">
+                school = #{school,jdbcType=VARCHAR},
             </if>
             <if test="address != null">
                 address = #{address,jdbcType=VARCHAR},
             </if>
-            <if test="defaults != null">
-                defaults = #{defaults,jdbcType=INTEGER},
+            <if test="phoneNumber != null">
+                phone_number = #{phoneNumber,jdbcType=VARCHAR},
             </if>
             <if test="userId != null">
                 user_id = #{userId,jdbcType=INTEGER},
@@ -104,14 +127,13 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="mjxm.pojo.Information">
     update information
-    set phone_number = #{phoneNumber,jdbcType=VARCHAR},
+    set number = #{number,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
-      defaults = #{defaults,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER}
     where information_id = #{informationId,jdbcType=INTEGER}
-    </update>
-    <update id="updateOtherInformation">
-    update information
-    set defaults = 2
     </update>
 </mapper>

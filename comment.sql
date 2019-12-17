@@ -23,14 +23,10 @@ CREATE TABLE `comment` (
   `comment_id` int(11) NOT NULL AUTO_INCREMENT,
   `content` text NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `about_comment_id` int(11) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
-  `requirement_id` int(11) NOT NULL,
   PRIMARY KEY (`comment_id`),
-  KEY `requirement_id` (`requirement_id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`requirement_id`) REFERENCES `requirement` (`requirement_id`),
-  CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

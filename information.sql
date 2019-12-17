@@ -21,9 +21,12 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `information`;
 CREATE TABLE `information` (
   `information_id` int(11) NOT NULL AUTO_INCREMENT,
-  `phone_number` varchar(255) DEFAULT NULL,
+  `number` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `department` varchar(255) NOT NULL,
+  `school` varchar(255) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `defaults` int(11) DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`information_id`),
   KEY `user_id` (`user_id`),

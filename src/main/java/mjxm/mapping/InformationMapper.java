@@ -7,21 +7,17 @@ import java.util.List;
 public interface InformationMapper {
     int deleteByPrimaryKey(Integer informationId);
 
-    int deleteAllInformation(Integer userId);
+    int deleteByUser(Integer userId);
 
-    int insert(Information record);
+    int insert(Information information);
 
-    int insertSelective(Information record);
+    int insertSelective(Information information);
 
     Information selectByPrimaryKey(Integer informationId);
 
-    Information selectInformationJoinUser(Integer informationId);
+    Information selectByUser(Integer informationId);
 
-    List<Information> selectUserAllInformation(Integer userId);
+    int updateByPrimaryKeySelective(Information information);
 
-    int updateByPrimaryKeySelective(Information record);
-
-    int updateByPrimaryKey(Information record);
-
-    int updateOtherInformation();
+    int updateByPrimaryKey(Information information);
 }
