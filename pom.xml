@@ -14,7 +14,7 @@
         <!-- spring版本 -->
         <springVersion>4.3.1.RELEASE</springVersion>
         <!-- mybatis版本 -->
-        <mybatis.version>3.2.6</mybatis.version>
+        <mybatis.version>3.5.6</mybatis.version>
         <mysqlVersion>5.1.38</mysqlVersion>
         <lombokVersion>1.16.10</lombokVersion>
         <log4jVersion>1.2.17</log4jVersion>
